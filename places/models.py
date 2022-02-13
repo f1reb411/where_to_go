@@ -2,11 +2,11 @@ from django.db import models
 
 
 class Place(models.Model):
-    title = models.CharField(max_length=100)
-    description_short = models.TextField(blank=True)
-    description_long = models.TextField(blank=True)
-    lng = models.FloatField()
-    lat = models.FloatField()
+    title = models.CharField('название', max_length=100)
+    description_short = models.TextField('короткое описание', blank=True)
+    description_long = models.TextField('длинное описание', blank=True)
+    lng = models.FloatField('долгота')
+    lat = models.FloatField('широта')
 
     def __str__(self):
         return self.title
@@ -14,4 +14,8 @@ class Place(models.Model):
 
 class Image(models.Model):
     place = models.ForeignKey(Place, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField()
+    image = models.ImageField('картинка')
+    position = models.PositiveIntegerField(default=0, verbose_name='позиция')
+
+    def __str__(self):
+        return f'{self.id} {self.place}'
