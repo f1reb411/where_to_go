@@ -1,9 +1,8 @@
+from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from adminsortable2.admin import SortableInlineAdminMixin
-
-from .models import Place, Image
+from .models import Image, Place
 
 admin.site.register(Image)
 
