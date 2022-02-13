@@ -17,5 +17,8 @@ class Image(models.Model):
     image = models.ImageField('картинка')
     position = models.PositiveIntegerField(default=0, verbose_name='позиция')
 
+    class Meta:
+        ordering = ['position']
+
     def __str__(self):
         return f'{self.id} {self.place}'
