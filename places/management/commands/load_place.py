@@ -19,7 +19,7 @@ class Command(BaseCommand):
         response.raise_for_status()
         place_json = response.json()
 
-        new_place, _ = Place.objects.get_or_create(
+        new_place, created = Place.objects.get_or_create(
             title=place_json['title'],
             lng=place_json['coordinates']['lng'],
             lat=place_json['coordinates']['lat'],
@@ -29,15 +29,16 @@ class Command(BaseCommand):
             }
         )
 
-        for number, link in enumerate(place_json['imgs']):
-            response = requests.get(link)
-            response.raise_for_status()
+        if created:
+            for number, link in enumerate(place_json['imgs']):
+                response = requests.get(link)
+                response.raise_for_status()
 
-            new_image, _ = Image.objects.get_or_create(
-                place=new_place,
-                position=number
-            )
+                new_image, _ = Image.objects.get_or_create(
+                    place=new_place,
+                    position=number
+                )
 
-            new_image.image.save(
-                os.path.basename(response.url), ContentFile(response.content)
-            )
+                new_image.image.save(
+                    os.path.basename(response.url), ContentFile(response.content), save=True
+                )
