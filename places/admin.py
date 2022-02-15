@@ -4,8 +4,6 @@ from django.utils.html import format_html
 
 from .models import Image, Place
 
-admin.site.register(Image)
-
 
 class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
@@ -23,3 +21,8 @@ class PlaceAdmin(admin.ModelAdmin):
         ImageInline
     ]
     search_fields = ['title']
+
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['place']
