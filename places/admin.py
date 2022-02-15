@@ -1,6 +1,6 @@
 from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 
 from .models import Image, Place
 
@@ -14,12 +14,7 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     readonly_fields = ['get_preview']
 
     def get_preview(self, obj):
-        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
-            url=obj.image.url,
-            width=400,
-            height=200,
-        )
-        )
+        return format_html('<img src="{}" width="400" height="200" />', obj.image.url)
 
 
 @admin.register(Place)

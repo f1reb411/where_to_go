@@ -17,20 +17,20 @@ class Command(BaseCommand):
         url = options['url']
         response = requests.get(url)
         response.raise_for_status()
-        place_json = response.json()
+        place_raw = response.json()
 
         new_place, created = Place.objects.get_or_create(
-            title=place_json['title'],
-            lng=place_json['coordinates']['lng'],
-            lat=place_json['coordinates']['lat'],
+            title=place_raw['title'],
+            lng=place_raw['coordinates']['lng'],
+            lat=place_raw['coordinates']['lat'],
             defaults={
-                'description_short': place_json['description_short'],
-                'description_long': place_json['description_long']
+                'description_short': place_raw['description_short'],
+                'description_long': place_raw['description_long']
             }
         )
 
         if created:
-            for number, link in enumerate(place_json['imgs']):
+            for number, link in enumerate(place_raw['imgs']):
                 response = requests.get(link)
                 response.raise_for_status()
 
