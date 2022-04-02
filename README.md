@@ -1,6 +1,6 @@
 # Where to go 
 
-Website about the most interesting places in city
+Website about the most interesting places in the city
 
 [Demo](https://f1r234324eb411.pythonanywhere.com/) 
 
