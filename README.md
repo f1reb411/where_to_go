@@ -1,54 +1,35 @@
-# Куда пойти — Москва
+# Where to go 
 
-Сайт о самых интересных местах в Москве
+Website about the most interesting places in city
 
-[Демо сайта](https://f1r234324eb411.pythonanywhere.com/) 
+[Demo](https://f1r234324eb411.pythonanywhere.com/) 
 
 
-## Запуск
+## Run
 
-Для запуска сайта вам понадобится Python третьей версии.
+* Download the code
+* Install dependencies with pip install -r requirements.txt
+* Create a database file and apply all migrations with python3 manage.py migrate
+* Start the server with python3 manage.py runserver
 
-Скачайте код с GitHub. Установите зависимости:
-```
-pip install -r requirements.txt
-```
-Создайте базу данных SQLite
-```
-python3 manage.py migrate
-```
-Запустите сервер
-```
-python3 manage.py runserver
-```
 
-## Переменные окружения
+## Environment Variables
 
-Часть настроек проекта берётся из переменных окружения. Чтобы их определить, создайте файл `.env` рядом с `manage.py` и запишите туда данные в таком формате: `ПЕРЕМЕННАЯ=значение`.
+Some project settings are taken from environment variables. To define them, create a .env file next to manage.py and write data there in the following format: VARIABLE=value.
 
-* DEBUG — дебаг-режим
-* SECRET_KEY=l0^us+=x&o)_orda=1c#vbeh8vk&+8=seou21cz7n#&v+*@8k4
-* ALLOWED_HOSTS=список разрешенных хостов
+There are 4 variables available:
 
-## Добавить место
+* DEBUG - debug mode. Set to True to see debug information in case of an error.
+* SECRET_KEY - secret key of the project
+* ALLOWED_HOSTS - see Django documentation.
+* DATABASE_URL — one-line address to the database, for example: sqlite:///db.sqlite3
 
-Чтобы добавить новое место, можно загрузить данные в админку или выполнить команду
+## Add location
+
+To add locations use python3 manage.py load_place <link> where link is a link to json with a description of the object
 ```
 python3 manage.py load_place https://example.com/path/to/place.json
 ```
-Пример json-файла
+[Example](https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/%D0%90%D1%80%D1%82-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%BE%20%C2%AB%D0%91%D1%83%D0%BD%D0%BA%D0%B5%D1%80%20703%C2%BB.json) 
 
-```python
-{
-    "title": "Дизайн-квартал Флакон",
-    " изображения " : [
-        " https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/media/40457e6b95ee4512d3c980202db6c12b.jpg "
-    ],
-    "description_short": "Креативный кластер Флакон вырос в целый район благодаря постоянному взаимодействию с горожанами, созданию живого творческого сообщества и внимательному выбору резидентов. ",
-    "description_long": "<p>Флакон — место притяжения горожан и туристов. Здесь разместилось множество шоу-румов, студий и мастерских, кафе и и ресторанов, площадок для обучения, концертных и театральных пространств и многое другое. Всего свыше 250 арендаторов. Флакон создан так, чтобы каждый посетитель мог здесь творить, самовыражаться и отдыхать.</p><h3>Особенности креативного кластера</h3><ul><li>Это открытое и доступное пространство без заборов, с коротким проходом от станции метро Дмитровская.</li><li>Инфраструктура удобна и продолжает улучшаться. Есть парковка и велопарковка, каршеринг, пешеходная зона, зелёные зоны для отдыха, спортивные площадки под открытым небом.</li><li>Для резидентов созданы такие рабочие условия, в которых комфортно творить.</li><li>Городские события проходят в новом формате, к ним присоединяются яркие и уникальные проекты из разных областей — культуры, искусства, бизнеса.</li></ul><blockquote class=\"directSpeech\"><p class=\"directSpeech-text\">Наш неспальный район — это атмосфера локального туризма, фестиваля. Настроение, за которым не нужно никуда лететь.</p></blockquote><p>На Флаконе проходят масштабные культурные и фестивальные события. Фестивали страноведения проводятся в формате «дней» разных стран — Франции, Норвегии, Сингапура, Японии и многих других. Также здесь проходят автомобильный фестиваль «Листва», фестивали креативных индустрий и современного искусства. На форуме «Хлебокультура» собираются представители ремесленных пекарен, а на «Ламбада-маркете» — мастера и любители хэнд-мейда.</p><p>Флакон — одно из самых популярных мест для городских мероприятий, выставок, театральных постановок, видео- и фотосъёмок большого масштаба.</p><p>Кафе и шоу-румы Флакона работают с 10:00 до 22:00.</p><p>В ноябре 2019 года стартовала программа лояльности для посетителей.</p>",
-    " координаты " : {
-        " длинный " : " 37.58440699999958 " ,
-        " лат " : " 55.80563009999988 "
-    }
-}
-```
+
